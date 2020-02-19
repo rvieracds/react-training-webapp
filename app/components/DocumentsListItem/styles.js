@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import { fonts, colors } from 'assets/css/style-utils';
+import Button from '@material-ui/core/Button';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -13,11 +13,36 @@ export const Wrapper = styled.div`
   border-radius: 8px;
   border: solid 1px rgba(34, 0, 14, 0.12);
   background-color: #ffffff;
+
+  @media screen and (max-width: 630px) {
+    height: fit-content;
+    display: block;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const LeftWrapper = styled.div`
   display: flex;
   flex-direction: row;
+
+  @media screen and (max-width: 630px) {
+    display: block;
+    text-align: center;
+  }
+`;
+
+export const RightWrapper = styled.div`
+  @media screen and (max-width: 630px) {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 690px) {
+    text-align: center;
+  }
 `;
 
 export const LeftLabelWrapper = styled.div`
@@ -34,6 +59,15 @@ export const LeftTitleLabel = styled.div`
   letter-spacing: normal;
   color: #22000e;
   margin-left: 24px;
+
+  @media screen and (max-width: 320px) {
+    font-size: 5.5vw;
+  }
+
+  @media screen and (max-width: 630px) {
+    margin-left: 0px;
+    padding-top: 5px;
+  }
 `;
 
 export const LeftSubtitleLabel = styled.div`
@@ -45,70 +79,56 @@ export const LeftSubtitleLabel = styled.div`
   letter-spacing: normal;
   color: #22000e;
   margin-left: 24px;
+
+  @media screen and (max-width: 320px) {
+    font-size: 4.5vw;
+  }
+
+  @media screen and (max-width: 630px) {
+    margin-left: 0px;
+    padding-top: 5px;
+  }
 `;
 
-export const ButtonWrapper = styled.div`
-  width: 93px;
-  height: 42px;
-  border-radius: 4px;
-  background-color: #ff086e;
-`;
-
-export const IconWrapper = styled.div`
+export const Icon = styled.img`
   width: 41px;
   height: 48px;
   object-fit: contain;
 `;
 
-export const UnfilledButton = styled.div`
-  
+export const StyledInputFile = styled.input`
+  display: none;
 `;
 
-export const FilledButton = styled.button`
+export const UnfilledButton = styled(Button)`
+  background-color: #fff;
+  box-shadow: none;
+  color: #ff086e;
+  &:hover {
+    background-color: #fff;
+    box-shadow: none;
+  }
+
+  @media screen and (max-width: 320px) {
+    font-size: 4vw;
+  }
+`;
+
+export const FilledButton = styled(Button)`
+  width: 93px;
+  height: 42px;
+  border-radius: 4px;
   background-color: #ff086e;
   box-shadow: none;
-
-  font-size: 16;
+  padding: 7px 14px;
   color: #fff;
   font-weight: bold;
-
-  '& :hover': {
+  &:hover {
     background-color: #ff086e;
     box-shadow: none;
-  };
+  }
+
+  @media screen and (max-width: 320px) {
+    font-size: 4vw;
+  }
 `;
-
-
-// export const RemoveButton = styled.img`
-//   cursor: pointer;
-//   margin: 0 12px 0 24px;
-// `;
-
-// export const ExpiresLabel = styled.label`
-//   font-family: ${fonts.roboto};
-//   font-size: 16px;
-//   font-weight: 300;
-//   font-style: normal;
-//   font-stretch: normal;
-//   line-height: normal;
-//   letter-spacing: normal;
-//   color: ${colors.black};
-// `;
-
-// export const ExpiresValue = ExpiresLabel.extend`
-//   font-weight: 400;
-//   margin-left: 8px;
-// `;
-
-// export const CardInfo = styled.label`
-//   flex-grow: 1;
-//   opacity: 0.87;
-//   font-family: ${fonts.roboto};
-//   font-size: 16px;
-//   font-weight: 400;
-//   font-style: normal;
-//   font-stretch: normal;
-//   line-height: normal;
-//   letter-spacing: normal;
-//   color: ${colors.black};
-// `;

@@ -6,29 +6,23 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-
-
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
-import pngmeLogo from '../../images/pngme-logo.svg';
-import DocumentsListItem from '../../components/DocumentsListItem';
-
-
-
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import pngmeLogo from '../../images/pngme-logo.svg';
+// import DocumentsListItem from '../../components/DocumentsListItem';
+import DocumentsUploadHeader from '../../components/DocumentsUploadHeader';
+import DocumentsUploadActionFooter from '../../components/DocumentsUploadActionFooter';
+import DocumentsList from '../../components/DocumentsList';
+
 import makeSelectDocumentsUpload from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-
-
-
-
-
 
 const utilityBillsList = [
   { id: 1, name: 'Mobile bill', status: '', date: 'December 2019' },
@@ -43,9 +37,6 @@ const statementsList = [
   { id: 1, name: 'Mobile money statement', status: '', date: 'December 2019' },
   { id: 2, name: 'Nigeria Bank statement', status: '', date: 'December 2019' },
 ];
-
-
-
 
 const useStyles = makeStyles(theme => ({
   filledButton: {
@@ -63,7 +54,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: '4vw',
     },
   },
-  
+
   unfilledButton: {
     backgroundColor: '#fff',
     boxShadow: 'none',
@@ -79,7 +70,6 @@ const useStyles = makeStyles(theme => ({
     '@media screen and (max-width: 320px)': {
       fontSize: '4vw',
     },
-
   },
 
   submitDocsButton: {
@@ -110,48 +100,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const renderDocumentItemContainer = item => <DocumentsListItem {...item} />
-
-// const renderDocumentItemContainer = (classes) => (
-//   <div className="documents-rectangle-class" style={{ justifyContent: 'space-between', marginBottom: 16 }}>
-
-//     <div className="row-section-one">
-//       {/* <div style={{ marginRight: 24 }} > */}
-//       <div style={{ marginRight: 0 }} >
-//         <img src={documentIcon} className="documents-rectangle-icon-class"/>
-//       </div>
-
-//       <div style={{ flex: 1, flexDirection: 'column' }} >
-//         <div className="documents-title-left-side-text" >
-//           Mobile bill
-//         </div>
-//         <div className="documents-subtitle-left-side-text" >
-//           Bill for December 2019
-//         </div>
-//       </div>
-//     </div>
-
-//     <div className="row-section-two" >
-//         <Button className={classes.unfilledButton}>Don’t have it</Button>
-//         <input
-//           accept="image/*"
-//           className={classes.input}
-//           id="contained-button-file"
-//           multiple
-//           type="file"
-//         />
-//         <label htmlFor="contained-button-file" style={{ marginBottom: 0 }}>
-//           <Button variant="contained" component="span" className={classes.filledButton} >
-//             Upload
-//           </Button>
-//         </label>
-//     </div>
-
-//   </div>
-// );
-
-
-
 export function DocumentsUpload() {
   useInjectReducer({ key: 'documentsUpload', reducer });
   useInjectSaga({ key: 'documentsUpload', saga });
@@ -160,52 +108,19 @@ export function DocumentsUpload() {
 
   return (
     <div>
-      <Helmet>
-        <title>DocumentsUpload</title>
-        <meta name="description" content="Description of DocumentsUpload" />
-      </Helmet>
-      
-
-
-
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="md" style={{ marginTop: 24, marginBottom: 87 }}>
-
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
-            <p className="upload-docs-title">Upload documents and increase your score</p>
-            <p className="upload-docs-subtitle">Utility Bills</p>
-          </div>
-          {utilityBillsList.map(item => renderDocumentItemContainer(item))}
-
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
-            <p className="upload-docs-subtitle">Statements</p>
-          </div>
-          {statementsList.map(item => renderDocumentItemContainer(item))}
-
-
-          <div className="section-three-class">
-            <p className="documents-uploaded-text" style={{ margin: 0, marginLeft: "auto" }} >
-              0 of 5 documents uploaded
-            </p>  
-            <Button variant="contained" component="span" className={classes.submitDocsButton}>
-              Submit documents
-            </Button>
-          </div>
-
+          <DocumentsUploadHeader />
+          {/* Still need to pass as props both documents list gotten from BE */}
+          <DocumentsList
+            utilityBillsList={utilityBillsList}
+            statementsList={statementsList}
+          />
+          {/* Still need to pass as props the current number of docs uploaded and the total docs */}
+          <DocumentsUploadActionFooter />
         </Container>
       </React.Fragment>
-
-
-
-
-      {/* <React.Fragment>
-        <CssBaseline />
-        <Container maxWidth="md" style={{ marginTop: 53, backgroundColor: 'orange' }}>
-        </Container>
-      </React.Fragment> */}
-
-
     </div>
   );
 }
