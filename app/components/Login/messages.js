@@ -19,6 +19,6 @@ export default defineMessages({
   },
   requestNewCodeLabel: {
     id: `${scope}.requestNewCodeLabel`,
-    defaultMessage: 'Request another code in {timer}',
+    defaultMessage: 'Request another code in {countdown}',
   },
 });

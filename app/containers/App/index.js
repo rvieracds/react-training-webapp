@@ -20,7 +20,7 @@ export default function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/login" component={HomePage} />
         <Route exact path="/uploads" component={DocumentsUpload} />
         <Route component={NotFoundPage} />
       </Switch>

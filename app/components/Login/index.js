@@ -1,18 +1,12 @@
-/**
- *
- * Login
- *
- */
-
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 
 import ReactCodeInput from 'react-code-input';
 import { FormattedMessage } from 'react-intl';
 
 import {
   Wrapper,
+  StyledInput,
   HeaderTitleIcon,
   HeaderTitleLabel,
   HeaderSubtitleLabel,
@@ -21,35 +15,79 @@ import {
 import pngmeLogo from '../../images/pngme-logo.svg';
 import messages from './messages';
 
-function Login() {
+const inputProps = {
+  inputStyle: {
+    width: 45,
+    height: 50,
+    borderRadius: 4,
+    borderWidth: 0,
+    margin: 8,
+    backgroundColor: 'rgba(34,0,14,0.1)',
+    textAlign: 'center',
+    MozAppearance: 'textfield',
+    fontFamily: 'monospace',
+    fontSize: '14px',
+  },
+  inputStyleInvalid: {
+    width: 45,
+    height: 50,
+    borderRadius: 4,
+    borderWidth: 0,
+    margin: 8,
+    backgroundColor: 'rgba(34,0,14,0.1)',
+    textAlign: 'center',
+    MozAppearance: 'textfield',
+    fontFamily: 'monospace',
+    fontSize: '14px',
+    color: 'red',
+    border: '1px solid red',
+  },
+};
+
+function Login(props) {
+  const [passcode, setPasscode] = useState('');
+  const [countdown, setCountdown] = useState(0);
+
+  useEffect(() => {
+    console.log('props ', props)
+    if (passcode.length === 5) {
+      // props.history.push("/uploads");
+      props.onLogin(passcode);
+    }
+  }, [passcode]);
+
   return (
     <Wrapper>
       <HeaderTitleIcon src={pngmeLogo} />
       <HeaderTitleLabel>
-        <FormattedMessage {...messages.headerTitle} />
+        <FormattedMessage {...messages.headerTitleLabel} />
       </HeaderTitleLabel>
 
       <HeaderSubtitleLabel>
-        <FormattedMessage {...messages.headerTitle} />
+        <FormattedMessage
+          {...messages.headerSubtitleLabel}
+          values={{ phoneNumber: props.phoneNumber || 0 }}
+        />
       </HeaderSubtitleLabel>
 
-      <ReactCodeInput
-        type='number'
-        fields={5}
-        autoFocus
-        className={classes.inputClass}
-        {...inputProps}
-        onChange={e => setCode(e)}
-        // isValid={this.props.errorVerifyCode === null}
-      />
+      <StyledInput>
+        <ReactCodeInput
+          type="number"
+          fields={5}
+          autoFocus
+          {...inputProps}
+          onChange={e => setPasscode(e)}
+          isValid={props.error === null}
+        />
+      </StyledInput>
 
       <FooterLabel>
-        <FormattedMessage {...messages.headerTitle} />
+        <FormattedMessage
+          {...messages.requestNewCodeLabel}
+          values={{ countdown: countdown || 0 }}
+        />
       </FooterLabel>
     </Wrapper>
-
-
-
 
     // <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column'  }}>
     //   <img src={pngmeLogo} />
