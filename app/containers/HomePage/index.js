@@ -37,7 +37,7 @@ function HomePage(props) {
 
   return (
     <React.Fragment>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <Container maxWidth="md" style={{ marginTop: 53 }}>
         {/* <Login onLogin={handleLogin} error={props.login.error} /> */}
         <Login onLogin={handleLogin} error={null} phoneNumber={phoneNumber} />
